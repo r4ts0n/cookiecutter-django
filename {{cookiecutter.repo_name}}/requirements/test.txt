@@ -1,0 +1,3 @@
+-r base.txt
+
+pylama==7.0.6
