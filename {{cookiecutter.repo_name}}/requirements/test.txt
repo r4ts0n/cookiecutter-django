@@ -1,3 +1,4 @@
 -r base.txt
 
 pylama==7.0.6
+pytest==2.8.2
