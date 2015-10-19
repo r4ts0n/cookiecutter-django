@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import environ
 
-BASE_DIR = environ.Path(__file__) - 4
+from django.utils.translation import ugettext_lazy as _
+
+APP_DIR = environ.Path(__file__) - 2
+BASE_DIR = APP_DIR - 1
 
 env = environ.Env()
 
@@ -40,7 +43,7 @@ ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(APP_DIR.path('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,11 +59,14 @@ TEMPLATES = [
 WSGI_APPLICATION = '{{ cookiecutter.repo_name }}.wsgi.application'
 
 DATABASES = {
-    'default': env.db(
-        'DATABASE_URL',
-        default='postgres://localhost/{{ cookiecutter.repo_name }}'),
+    'default': env.db('DATABASE_URL',
+                      'postgres://localhost/{{ cookiecutter.repo_name }}'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+LANGUAGES = (
+    ('en-us', _('English')),
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
