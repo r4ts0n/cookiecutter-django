@@ -1,5 +1,6 @@
 {
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
-    "domain_name": "example.com"
+    "domain_name": "example.com",
+    "use_django_cms": "n"
 }
