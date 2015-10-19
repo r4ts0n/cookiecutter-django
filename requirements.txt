@@ -1,4 +1,4 @@
+-r {{cookiecutter.repo_name}}/requirements/test.txt
+
 cookiecutter==1.2.1
 plumbum==1.6.0
-
-pytest==2.8.2

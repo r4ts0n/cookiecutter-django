@@ -4,7 +4,7 @@ import pytest
 
 from cookiecutter.main import cookiecutter
 from plumbum import local
-from plumbum.cmd import pip, python
+from plumbum.cmd import pylama, python
 
 
 def generate_project(**kwargs):
@@ -18,8 +18,7 @@ def test_code_style(tmpdir):
         'project_name': project_name,
     })
     with local.cwd(os.path.join(output_dir, project_name)):
-        pip['install', '-r', 'requirements/test.txt']()
-        local['pylama']()
+        pylama()
 
 
 @pytest.mark.parametrize('use_django_cms', ['y', 'n'])
@@ -33,5 +32,4 @@ def test_django_test(tmpdir, use_django_cms):
     with local.cwd(os.path.join(output_dir, project_name)), local.env(
         DJANGO_SETTINGS_MODULE='{}.settings.test'.format(project_name)
     ):
-        pip['install', '-r', 'requirements/test.txt']()
         python['manage.py', 'test']()
