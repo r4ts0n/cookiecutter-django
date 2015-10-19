@@ -25,7 +25,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    {%- if cookiecutter.use_django_cms == 'y' %}
+    {% if cookiecutter.use_django_cms == 'y' -%}
     'django.contrib.sites',
     'cms',
     'treebeard',
@@ -44,7 +44,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    {%- if cookiecutter.use_django_cms == 'y' %}
+    {% if cookiecutter.use_django_cms == 'y' -%}
     'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
@@ -53,9 +53,12 @@ MIDDLEWARE_CLASSES = (
     {%- endif %}
 )
 
-{%- if cookiecutter.use_django_cms == 'y' %}
-
+{% if cookiecutter.use_django_cms == 'y' -%}
 SITE_ID = 1
+
+LANGUAGES = (
+    ('en-us', _('English')),
+)
 {%- endif %}
 
 ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
@@ -71,7 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                {%- if cookiecutter.use_django_cms == 'y' %}
+                {% if cookiecutter.use_django_cms == 'y' -%}
                 'django.core.context_processors.i18n',
                 'django.core.context_processors.media',
                 'django.core.context_processors.static',
@@ -91,10 +94,6 @@ DATABASES = {
         default='postgres://localhost/{{ cookiecutter.repo_name }}'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-
-LANGUAGES = (
-    ('en-us', _('English')),
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
