@@ -9,9 +9,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import environ
 
-from django.utils.translation import ugettext_lazy as _
-
-
 BASE_DIR = environ.Path(__file__) - 4
 
 env = environ.Env()
@@ -25,14 +22,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    {% if cookiecutter.use_django_cms == 'y' -%}
-    'django.contrib.sites',
-    'cms',
-    'treebeard',
-    'menus',
-    'sekizai',
-    'djangocms_admin_style',
-    {%- endif %}
 )
 
 MIDDLEWARE_CLASSES = (
@@ -44,22 +33,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    {% if cookiecutter.use_django_cms == 'y' -%}
-    'django.middleware.locale.LocaleMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
-    {%- endif %}
 )
-
-{% if cookiecutter.use_django_cms == 'y' -%}
-SITE_ID = 1
-
-LANGUAGES = (
-    ('en-us', _('English')),
-)
-{%- endif %}
 
 ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 
@@ -74,13 +48,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                {% if cookiecutter.use_django_cms == 'y' -%}
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'sekizai.context_processors.sekizai',
-                'cms.context_processors.cms_settings',
-                {%- endif %}
             ],
         },
     },
