@@ -18,7 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    {% if cookiecutter.use_django_cms == 'y' -%}
+    {%- if cookiecutter.use_django_cms == 'y' %}
     url(r'^', include('cms.urls')),
     {%- endif %}
 ]
