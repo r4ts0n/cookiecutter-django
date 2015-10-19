@@ -25,5 +25,7 @@ def test_django_test(tmpdir):
     generate_project(output_dir=output_dir, extra_context={
         'project_name': project_name,
     })
-    with local.cwd(os.path.join(output_dir, project_name)):
+    with local.cwd(os.path.join(output_dir, project_name)), local.env(
+        DJANGO_SETTINGS_MODULE='{}.settings.test'.format(project_name)
+    ):
         python['manage.py', 'test']()
