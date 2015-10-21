@@ -11,8 +11,8 @@ import environ
 
 from django.utils.translation import ugettext_lazy as _
 
-APP_DIR = environ.Path(__file__) - 2
-BASE_DIR = APP_DIR - 1
+project_dir = environ.Path(__file__) - 2
+root_dir = project_dir - 1
 
 env = environ.Env()
 
@@ -43,7 +43,7 @@ ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(APP_DIR.path('templates'))],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,5 +83,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_ROOT = str(project_dir.path('static'))
 
 STATIC_URL = '/static/'
