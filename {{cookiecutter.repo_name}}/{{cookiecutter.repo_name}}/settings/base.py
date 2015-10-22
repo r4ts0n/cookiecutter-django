@@ -19,6 +19,8 @@ env = environ.Env()
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
 INSTALLED_APPS = (
+    '{{ cookiecutter.repo_name }}',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
